@@ -1,0 +1,24 @@
+/*joep zegers
+* opdracht 4
+*/
+
+
+const int temp = A5; //sluit temp sensor aan op a5
+      float tempwaarde = 0; //starstwaarde temp
+ 
+void setup(){
+Serial.begin(9600); //serial beginnen
+}
+ 
+void loop(){
+ 
+   tempwaarde = analogRead(temp);
+  
+   tempwaarde = tempwaarde * 0.48828125;
+  
+   Serial.print("teperatuur = ");
+   Serial.print(tempwaarde); // print de temp
+   Serial.print("*C");
+   Serial.println();
+   delay(500); 
+}
