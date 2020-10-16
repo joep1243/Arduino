@@ -1,0 +1,45 @@
+/*
+ * Joep zegers
+ * opdracht 9
+ */
+char Incoming_value = 0;   
+int groen = 11;
+int geel = 8;
+int rood = 5;
+ 
+void setup() {
+  Serial.begin(9600);
+  pinMode(groen, OUTPUT);
+  pinMode(geel, OUTPUT);
+  pinMode(rood, OUTPUT);
+}
+void loop()
+{
+  if(Serial.available() > 0) //als serial hoger dan 1 is voer uit
+  {
+    Incoming_value = Serial.read(); // zet read waarde als inkomde waarde
+    Serial.print(Incoming_value);        //print de waarde
+    Serial.print("\n");        //nieuwe ljjn
+  }
+  
+    if(Incoming_value == '1'){  //als de inkomde waarde 1 is dus hij staat aan dan voer uit
+      digitalWrite(rood, LOW); //uit zetten
+      digitalWrite(geel, HIGH);//aan zetten
+      delay(1000);//staat voor handigheid op 1sec moet in gebruik op 6sec
+      digitalWrite(geel, LOW);
+      digitalWrite(groen, HIGH);
+      delay(1000);//staat voor handigheid op 1sec moet in gebruik op 12sec
+      digitalWrite(groen, LOW);
+      digitalWrite(rood, HIGH);
+      delay(1000);//staat voor handigheid op 1sec moet in gebruik op 12sec
+    }else{//dit is om geel te laten knipperen
+          digitalWrite(groen, LOW);
+          digitalWrite(rood, LOW);
+          digitalWrite(geel, LOW);
+          digitalWrite(geel, HIGH);
+          delay(1000);
+          digitalWrite(geel, LOW);
+          delay(1000);
+    } 
+ 
+}
