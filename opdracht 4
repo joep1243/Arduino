@@ -14,7 +14,7 @@ void loop(){
  
    tempwaarde = analogRead(temp);//lees waarde van temp
   
-   tempwaarde = tempwaarde * 0.48828125;//tempwaarde * 0.48
+   tempwaarde = tempwaarde * 0.48828125;//tempwaarde * 0.48 om waarde juist te laten zien
   
    Serial.print("teperatuur = ");
    Serial.print(tempwaarde); // print de temp
