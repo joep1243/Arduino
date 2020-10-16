@@ -1,0 +1,51 @@
+/*
+ * Joep zegers
+ * opdracht 6
+ */
+ 
+#include <Servo.h>
+ 
+Servo myservo;
+ 
+const int btn1 = 11; //zet knop op 11
+const int btn2 = 10; // zet knop op 10
+int buttonState1 = 0;
+int buttonState2= 0;
+int ang;
+ 
+const int Delay = 0.83; //delay van 0.83ms
+ 
+ 
+void setup()
+{
+  myservo.attach(5); // servo staat op 5
+  pinMode(btn1, INPUT);  // btn1  input
+  pinMode(btn2, INPUT);  //  btn2 input
+}
+ 
+void loop()
+{
+  buttonState1 = digitalRead(btn1); //zet read
+  buttonState2 = digitalRead(btn2); //zet read
+ 
+  if (buttonState1 == HIGH) {  //als btn1 state high voer uit
+        int angleIncrement = 1;
+        for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
+            myservo.write (ang);
+            delay (Delay); //  delay van 0.83ms draaidt 1 graden
+            }   
+      }else if (buttonState2 == HIGH){ //als btn2 state high voer uit
+          int angleIncrement = 2;
+          for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
+              myservo.write (ang);//  delay van 0.83ms draaidt 2 graden
+              delay (Delay);
+            }
+       }else if (buttonState2 == HIGH && buttonState1 == HIGH){ //als btn1 & btn 2 state high voer uit
+          int angleIncrement = 2;
+          for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
+              myservo.write (ang);//  delay van 0.83ms draaidt 2 graden
+              delay (2000);
+              }
+             }else{myservo.write(0);}//zet servo op 0
+            delay(15); //wacht 0
+          }
