@@ -1,51 +1,44 @@
-/*
- * Joep zegers
- * opdracht 6
- */
- 
-#include <Servo.h>
- 
-Servo myservo;
- 
-const int btn1 = 11; //zet knop op 11
-const int btn2 = 10; // zet knop op 10
-int buttonState1 = 0;
-int buttonState2= 0;
-int ang;
- 
-const int Delay = 0.83; //delay van 0.83ms
- 
- 
-void setup()
-{
-  myservo.attach(5); // servo staat op 5
-  pinMode(btn1, INPUT);  // btn1  input
-  pinMode(btn2, INPUT);  //  btn2 input
+#include<Servo.h>
+int KNOP1 = 11; // defineer de knop1
+int KNOP2 = 10; // defineer de knop2
+Servo servo;
+
+void setup() {
+  pinMode(KNOP1, INPUT);//zet knop 1 op input
+  pinMode(KNOP2, INPUT);//zet knop 2 op input
+  servo.attach(5); //zet servo op 6
 }
- 
-void loop()
-{
-  buttonState1 = digitalRead(btn1); //zet read
-  buttonState2 = digitalRead(btn2); //zet read
- 
-  if (buttonState1 == HIGH) {  //als btn1 state high voer uit
-        int angleIncrement = 1;
-        for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
-            myservo.write (ang);
-            delay (Delay); //  delay van 0.83ms draaidt 1 graden
-            }   
-      }else if (buttonState2 == HIGH){ //als btn2 state high voer uit
-          int angleIncrement = 2;
-          for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
-              myservo.write (ang);//  delay van 0.83ms draaidt 2 graden
-              delay (Delay);
-            }
-       }else if (buttonState2 == HIGH && buttonState1 == HIGH){ //als btn1 & btn 2 state high voer uit
-          int angleIncrement = 2;
-          for (ang = 0; ang < 120; ang += angleIncrement) { //ang = 0 als ang kleiner is dan 120 ang += angleincrement  
-              myservo.write (ang);//  delay van 0.83ms draaidt 2 graden
-              delay (2000);
-              }
-             }else{myservo.write(0);}//zet servo op 0
-            delay(15); //wacht 0
-          }
+
+void loop() {
+  int status1 = digitalRead(KNOP1);//zet knop1 status
+  int status2 = digitalRead(KNOP2);//zet knop2 status
+
+  //status 1 = high en status 2 = low
+  if (status1 == HIGH && status2 == LOW) {
+    servostart(8, 0);//120 1sec
+  }
+  //status 1 = low en status 2 = high
+  else if (status1 == LOW && status2 == HIGH) {
+    servostart(4, 0);//120 0.5 sec
+  }
+  //status 1 = high en status 2 = high
+  else if (status1 == HIGH && status2 == HIGH) {
+    servostart(8, 2000);//120 1sec en 0 1sec
+  }
+  else {
+    servo.write(0); //zet servo op 0
+  }
+}
+
+void servostart(int delay1, int delay2) {
+  for (int positie = 0; positie <= 120; positie++) {//servo naar positie sturen
+    servo.write(positie);//zet positie in servo
+    delay(delay1);//delay
+  }
+  delay(delay2);//om servo terug te laten gaan
+
+  for (int positie = 120; positie >= 0; positie--) {//servo van positie sturen
+    servo.write(positie);//zet positie in servo
+    delay(delay1);//delay
+  }
+}
