@@ -8,28 +8,28 @@ int time = 30; // time om de delay aan te passen
  
 void setup(){
   //pinmode te setten voor alle pins uit de array
-  for(count=0;count<8;count++) {
+   for(count=0;count<8;count++) {
     pinMode(pinArray[count], OUTPUT);
-  }
+   }
 }
  
 void loop() {
-  //for loop om te beginnen 
-  for(count=0;count<7;count++){//count op 0 mag max 7x om te zorgen dat led 8 niet nog een keer aangaat
-   digitalWrite(pinArray[count], HIGH);//zet pin op high
-   delay(time);
-   digitalWrite(pinArray[count + 1], HIGH);// + is om het soepeler te laten verlopen
-   delay(time);
-   digitalWrite(pinArray[count], LOW);//zet pin op low
-   delay(time*2); //langere delay op het terug loopen
-  }
-  //nog een for loop om de terug te gaan
-  for(count=7;count>0;count--) {
-   digitalWrite(pinArray[count], HIGH);
-   delay(time);
-   digitalWrite(pinArray[count - 1], HIGH);//- om de nummer 8 led goed aan te spreken ook om het soepeler te laten verlopen
-   delay(time);
-   digitalWrite(pinArray[count], LOW);
-   delay(time*2);//langere delay op het terug loopen
-  }
+   //for loop om te beginnen 
+   for(count=0;count<7;count++){//count op 0 mag max 7x om te zorgen dat led 8 niet nog een keer aangaat
+     digitalWrite(pinArray[count], HIGH);//zet pin op high
+     delay(time);
+     digitalWrite(pinArray[count + 1], HIGH);// + is om het soepeler te laten verlopen
+     delay(time);
+     digitalWrite(pinArray[count], LOW);//zet pin op low
+     delay(time*2); //langere delay op het terug loopen
+   }
+   //nog een for loop om de terug te gaan
+   for(count=7;count>0;count--) {
+     digitalWrite(pinArray[count], HIGH);
+     delay(time);
+     digitalWrite(pinArray[count - 1], HIGH);//- om de nummer 8 led goed aan te spreken ook om het soepeler te laten verlopen
+     delay(time);
+     digitalWrite(pinArray[count], LOW);
+     delay(time*2);//langere delay op het terug loopen
+   }
 }
