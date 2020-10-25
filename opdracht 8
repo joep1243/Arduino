@@ -1,0 +1,102 @@
+/*
+   Joep Zegers
+   opdracht 8
+*/
+#include<IRremote.h>
+decode_results results;
+int count = 0; //zet count op 0
+int mem1 = 0; //mem1 op 0
+int mem2 = 0;//zet mem2 op0
+unsigned long ltime = 0; //lasttime op 0
+
+//LEDS
+int IR = 3; //ir sensor op 3
+int LED8 = 8;
+int LED9 = 9;
+int LED10 = 10;
+int LED11 = 11;
+IRrecv irrecv(IR);
+
+//remote sony
+long int R1 = 16;//knop1
+long int R2 = 2064;//knop2
+long int R3 = 1040;//knop3
+long int R4 = 3088;//knop4
+
+void setup() {
+  Serial.begin(9600);//serial voor print
+  irrecv.enableIRIn();
+
+  //LED output
+  pinMode (LED8, OUTPUT);
+  pinMode (LED9, OUTPUT);
+  pinMode (LED10, OUTPUT);
+  pinMode (LED11, OUTPUT);
+}
+
+void loop() {
+
+  //Status van LED
+  int S8 = digitalRead(LED8);
+  int S9 = digitalRead(LED9);
+  int S10 = digitalRead(LED10);
+  int S11 = digitalRead(LED11);
+
+  if (irrecv.decode(&results)) {
+    Serial.println(results.value);//print waarde van ir singal als er resultaten zijn
+    irrecv.resume();
+
+    if (count < 2) { //count kleiner dan 2
+      if (results.value == R1 && S8 == LOW) {//als ir signal 1 2 3 4 spreek function Raction aan
+        Raction(LED8);//setwaarde van LED
+      } else if (results.value == R2 && S9 == LOW) {
+        Raction(LED9);//setwaarde van LED
+      } else if (results.value == R3 && S10 == LOW) {
+        Raction(LED10);//setwaarde van LED
+      } else if (results.value == R4 && S11 == LOW) {
+        Raction(LED11);//setwaarde van LED
+      }
+    }
+  }
+
+  if (count == 2) {//als count gelijk is aan 2
+    if (results.value == R1) {//als ir signal 1 2 3 4 spreek function blip aan
+      blip(100);//set blip 100
+    } else if (results.value == R2) {
+      blip(200);//set blip 200
+    } else if (results.value == R3) {
+      blip(300);//set blip 300
+    } else if (results.value == R4) {
+      blip(400);//set blip 400
+    }
+  }
+}
+
+void Raction(int LED) {//onthout 2 ingedrukte knoppen en leds
+  digitalWrite(LED, HIGH);//zet LED
+  if (mem1 == 0) {//mem gelijk aan 0
+    mem1 = LED; //mem1 set LED
+    count++;//count + 1
+  } else {
+    mem2 = LED; //mem2 set LED
+    count++;//count + 1
+  }
+}
+
+void blip(int bliptime) {//knipper time
+  unsigned long nowtime = millis();// nu tijd
+  int active1 = digitalRead(mem1);//status mem1
+  int active2 = digitalRead(mem2);//status mem2
+  if (nowtime - ltime >= bliptime) {//nowtime min ltime groter og gelijk aan bliptime
+    ltime = nowtime;//ltime is nowtime
+    if (active1 == LOW && active2 == LOW) {//als bijd LOW
+      digitalWrite(mem1, HIGH);//zet HIGH
+      digitalWrite(mem2, HIGH);//zet HIGH
+    }
+    else {
+      //Zet beide LEDS uit
+      digitalWrite(mem1, LOW);//zet LOW
+      digitalWrite(mem2, LOW);//zet LOW
+    }
+  }
+}
