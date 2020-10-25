@@ -1,71 +1,71 @@
 /*
- * Joep zegers
- * opdracht 5
- */
- #define RED 6 
- #define GREEN 5 
- #define BLUE 3 
- 
-void setup() { 
-    pinMode(RED, OUTPUT); 
-    pinMode(GREEN, OUTPUT); 
-    pinMode(BLUE, OUTPUT);  
-    digitalWrite(RED, HIGH);  //rood aan 
-    digitalWrite(GREEN, LOW); //groen uit
-    digitalWrite(BLUE, LOW);  //blouw uit
-} 
- 
-// benoem variablene 
-int redValue; 
-int greenValue; 
-int blueValue; 
- 
-void loop() { 
-   
-    redValue = 255; //rood aan
-    greenValue = 0; //groen uit
-    blueValue = 0; //blouw uit
- 
-    for(int i = 0; i < 255; i=i+1) { //i op 0  kleiner dan 255 dan plus 1
-      
-        redValue = redValue - 1;  // rood min 1
-        greenValue = greenValue + 1; //goen plus 1
-        
-        analogWrite(RED, redValue); 
-        analogWrite(GREEN, greenValue); 
-       
-        delay(10); //wacht 10
-    } 
-    // het zelfde geld voor degenen hier onder
- 
-    redValue = 0; //rood aan
-    greenValue = 255; //groen uit
-    blueValue = 0; //blouw uit
- 
-    for(int i = 0; i < 255; i += 1) { //i op 0  kleiner dan 255 dan plus 1
-      
-        greenValue = greenValue - 1;
-        blueValue = blueValue + 1;
- 
-        analogWrite(GREEN, greenValue);
-        analogWrite(BLUE, blueValue); 
- 
-        delay(10); //wacht 10
-    } 
- 
-    redValue = 0; //rood aan
-    greenValue = 0; //groen uit
-    blueValue = 255; //blouw uit
- 
- 
-    for(int i = 0; i < 255; i += 1) { //i op 0  kleiner dan 255 dan plus 1
-      
-        blueValue = blueValue - 1;
-        redValue = redValue + 1;
- 
-        analogWrite(BLUE, blueValue);
-        analogWrite(RED, redValue); 
- 
-        delay(10); //wacht 10
-    } 
+   Joep zegers
+   opdracht 5
+*/
+#define ROOD 6
+#define GROEN 5
+#define BLUE 3
+
+void setup() {
+  pinMode(ROOD, OUTPUT);
+  pinMode(GROEN, OUTPUT);
+  pinMode(BLOUW, OUTPUT);
+  digitalWrite(ROOD, HIGH);  //rood aan
+  digitalWrite(GROEN, LOW); //groen uit
+  digitalWrite(BLOUW, LOW);  //blouw uit
+}
+
+//benoem variablene
+int redValue;
+int greenValue;
+int blueValue;
+
+void loop() {
+
+  redValue = 255; //rood aan
+  greenValue = 0; //groen uit
+  blueValue = 0; //blouw uit
+
+  for (int i = 0; i < 255; i = i + 1) { //i op 0  kleiner dan 255 dan plus 1
+
+    redValue = redValue - 1;  // rood min 1 dit is om rood uit te laten gaan
+    greenValue = greenValue + 1; //goen plus 1 dit is om groen aante laten gaan
+
+    analogWrite(ROOD, redValue); //schrijv de rood waarde neer
+    analogWrite(BLOUW, greenValue); //schrijv de groen waarde neer
+
+    delay(10); //wacht 10
+  }
+  // het zelfde geld voor degenen hier onder
+
+  redValue = 0; //rood uit
+  greenValue = 255; //groen aan
+  blueValue = 0; //blouw uit
+
+  for (int i = 0; i < 255; i += 1) { //i op 0  kleiner dan 255 dan plus 1
+
+    greenValue = greenValue - 1;
+    blueValue = blueValue + 1;
+
+    analogWrite(GROEN, greenValue);
+    analogWrite(BLOUW, blueValue);
+
+    delay(10); //wacht 10
+  }
+
+  redValue = 0; //rood uit
+  greenValue = 0; //groen uit
+  blueValue = 255; //blouw aan
+
+
+  for (int i = 0; i < 255; i += 1) { //i op 0  kleiner dan 255 dan plus 1
+
+    blueValue = blueValue - 1;
+    redValue = redValue + 1;
+
+    analogWrite(BLOUW, blueValue);
+    analogWrite(ROOD, redValue);
+
+    delay(10); //wacht 10
+  }
 }
