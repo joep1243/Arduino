@@ -1,51 +1,63 @@
 /*Joep Zegers
-*Opdracht 3
+  Opdracht 3
 */
 int input;
- 
+
 void setup()
 {
   Serial.begin(9600);
+  //set pinout
   pinMode (13, OUTPUT);
   pinMode (12, OUTPUT);
   pinMode (11, OUTPUT);
   pinMode (10, OUTPUT);
   pinMode (9, OUTPUT);
-   pinMode (8, OUTPUT);
+  pinMode (8, OUTPUT);
   pinMode (7, OUTPUT);
 }
- 
+
 void loop()
 {
-  //Analoog waarden 0/700
+  //Analoog waarden 0/750
   input = map(analogRead(0), 0, 1023, 0, 750);
-  
- 
- 
-  if(input > 100)// als input > 100 zet 13 aan anders uit
-  {digitalWrite(13, HIGH);}elsedigitalWrite(13, LOW);
- 
-  
-  if(input > 200) // als input > 200 zet 12 aan anders uit
- {digitalWrite(12, HIGH);}elsedigitalWrite(12, LOW);
- 
-  
-  if(input > 300)// als input > 300 zet 11 aan anders uit
- {digitalWrite(11, HIGH);}elsedigitalWrite(13, LOW);
- 
-  
-  if(input > 400)// als input > 400 zet 10 aan anders uit
-{digitalWrite(10, HIGH);}elsedigitalWrite(10, LOW);
- 
-  
-  if(input > 500)// als input > 500 zet 9 aan anders uit
-{digitalWrite(9, HIGH);}elsedigitalWrite(9, LOW);
- 
-   if(input >= 600)// als input > 600 zet 8 aan anders uit
-{digitalWrite(8, HIGH);}elsedigitalWrite(8, LOW);
- 
- 
-  if(input > 700)// als input > 700 zet 7 aan anders uit
-{digitalWrite(7, HIGH);}elsedigitalWrite(7, LOW);
- 
+
+  if (input > 100) // als input > 100 zet 13 aan anders uit
+  {
+    digitalWrite(13, HIGH); // zet 13 aan
+  } elsedigitalWrite(13, LOW);//zet 13 uit
+
+
+  if (input > 200) // als input > 200 zet 12 aan anders uit
+  {
+    digitalWrite(12, HIGH);
+  } elsedigitalWrite(12, LOW);
+
+
+  if (input > 300) // als input > 300 zet 11 aan anders uit
+  {
+    digitalWrite(11, HIGH);
+  } elsedigitalWrite(13, LOW);
+
+
+  if (input > 400) // als input > 400 zet 10 aan anders uit
+  {
+    digitalWrite(10, HIGH);
+  } elsedigitalWrite(10, LOW);
+
+
+  if (input > 500) // als input > 500 zet 9 aan anders uit
+  {
+    digitalWrite(9, HIGH);
+  } elsedigitalWrite(9, LOW);
+
+  if (input >= 600) // als input > 600 zet 8 aan anders uit
+  {
+    digitalWrite(8, HIGH);
+  } elsedigitalWrite(8, LOW);
+
+
+  if (input > 700) // als input > 700 zet 7 aan anders uit
+  {
+    digitalWrite(7, HIGH);
+  } elsedigitalWrite(7, LOW);
 }
