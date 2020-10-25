@@ -1,45 +1,45 @@
 /*
- * joep zegers
- * opdracht 7
- */
+   joep zegers
+   opdracht 7
+*/
 #include<Servo.h>
- 
+
 const int TrigPin = 8; //trig op pin 8
 const int EchoPin = 13; // echo op pin 13
- 
+
 Servo Servo1;
 int Positie = 0; // zet pos op 0
- 
+
 float Tijd;
 float Afstand;
- 
-    void setup() {
- 
-  Servo1.attach(9);  //Voeg de servo toe op poort 9 
+
+void setup() {
+
+  Servo1.attach(9);  //Voeg de servo toe op poort 9
   Serial.begin(9600);
   pinMode(TrigPin, OUTPUT);
   pinMode(EchoPin, INPUT);
-    }
-    
-    void loop() {
-    digitalWrite(TrigPin, LOW); //zet laag
-    delayMicroseconds(2);
-    digitalWrite(TrigPin, HIGH); //zet hoog
-    delayMicroseconds(10);
-    digitalWrite(TrigPin , LOW); //zet laag
- 
-    Tijd = pulseIn(EchoPin,HIGH); //zet hoog
- 
-    Afstand = Tijd / 58; //tijd : door 58
-    Serial.print(Afstand); //print afstand
-    Serial.println("cm"); //print cm
-    delay(100); //wacht 100
- 
-if (Afstand <= 10 && Afstand >= 4)// als afstand onder of gelijk aan 10 en boven en gelijk aan 4
-  { 
+}
+
+void loop() {
+  digitalWrite(TrigPin, LOW); //zet laag
+  delayMicroseconds(2);//2 msec delay
+  digitalWrite(TrigPin, HIGH); //zet hoog
+  delayMicroseconds(10);//10 msec delay
+  digitalWrite(TrigPin , LOW); //zet laag
+
+  Tijd = pulseIn(EchoPin, HIGH); //zet hoog
+
+  Afstand = Tijd / 58; //tijd : door 58
+  Serial.print(Afstand); //print afstand
+  Serial.println("cm"); //print cm
+  delay(100); //wacht 100
+
+  if (Afstand <= 10 && Afstand >= 4)// als afstand onder of gelijk aan 10 en boven en gelijk aan 4
+  {
     int PosAf = map(Afstand, 4, 10, 180, 0); // map van 4,10,180,0
- 
+
     Servo1.write(PosAf);
     delay(20);
-}
+  }
 }
