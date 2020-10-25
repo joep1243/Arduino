@@ -3,32 +3,37 @@
 //11/09/2020
 int pin_LED = 11; //led staat op pin 11
 int pin_switch = 2; //schakelaar staat op pin 2
- 
- 
+
 //variablen om de nieuwe en oude switch state te houden
 boolean oldSwitchState = LOW;
 boolean newSwitchState = LOW;
 boolean LEDstatus = LOW;
- 
-void setup() 
+
+void setup()
 {
-    pinMode(pin_LED, OUTPUT);  
-    digitalWrite(pin_LED,LOW); 
-    pinMode(pin_switch, INPUT); 
+  pinMode(pin_LED, OUTPUT);
+  digitalWrite(pin_LED, LOW);
+  pinMode(pin_switch, INPUT);
 }
- 
+
 void loop()
 {
   newSwitchState = digitalRead(pin_switch);
   delay(5);//vertraging voor het readen
-    if(newSwitchState != oldSwitchState)//als nieuwe switch status niet gelijk saat aan oude
+  if (newSwitchState != oldSwitchState) //als nieuwe switch status niet gelijk saat aan oude
+  {
+    if (newSwitchState == HIGH) //staat de switch aan
     {
-       if(newSwitchState == HIGH)//staat de switch aan
-       {
-           if(LEDstatus == LOW)//staat led uit
-           {digitalWrite(pin_LED, HIGH); LEDstatus = HIGH;}//zet led aan
-           else{digitalWrite(pin_LED, LOW); LEDstatus = LOW;}//zet led uit
-       }
-       oldSwitchState = newSwitchState;//zet variablen gelijk voorkomt meedere konp drukken
-    }   
+      if (LEDstatus == LOW) //staat led uit
+      {
+        digitalWrite(pin_LED, HIGH);  //zet led aan
+        LEDstatus = HIGH;
+      }
+      else {
+        digitalWrite(pin_LED, LOW);  //zet led uit
+        LEDstatus = LOW;
+      }
+    }
+    oldSwitchState = newSwitchState;//zet variablen gelijk voorkomt meedere konp drukken
+  }
 }
